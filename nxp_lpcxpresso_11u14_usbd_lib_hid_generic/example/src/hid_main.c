@@ -174,6 +174,12 @@ int main(void)
 
 	}
 
+	uint8_t rgb[3];
+	rgb[0] = 0x00;
+	rgb[1] = 0xff;
+	rgb[2] = 0x99;
+	ws2812_sendarray(rgb, 3);
+
 	while (1) {
 		__WFI();
 	}
