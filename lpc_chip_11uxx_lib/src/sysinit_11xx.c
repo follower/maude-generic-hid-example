@@ -64,7 +64,7 @@ void Chip_SystemInit(void)
 	   MSEL = 3 (this is pre-decremented), PSEL = 1 (for P = 2)
 	   FCLKOUT = FCLKIN * (MSEL + 1) = 12MHz * 4 = 48MHz
 	   FCCO = FCLKOUT * 2 * P = 48MHz * 2 * 2 = 192MHz (within FCCO range) */
-	Chip_Clock_SetupSystemPLL(3, 1);
+	Chip_Clock_SetupSystemPLL(2, 1); // A value of 2 for 16MHz crystal on the MAUDE board
 
 	/* Powerup system PLL */
 	Chip_SYSCTL_PowerUp(SYSCTL_POWERDOWN_SYSPLL_PD);
