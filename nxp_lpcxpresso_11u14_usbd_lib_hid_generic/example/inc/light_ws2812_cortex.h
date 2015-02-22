@@ -12,7 +12,7 @@
 // User defined area: CPU specific CMSIS include
 ///////////////////////////////////////////////////////////////////////
 
-#include "LPC8XX.h"			// Change this to the include for your MCU
+#include "board.h"			// Change this to the include for your MCU
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -21,14 +21,18 @@
 
 // Data port and pin definition for your CPU. Depending on the way
 // port access is implemented in your Cortex CPU, the set and clr
-// mask and addresses may be the same. This example is for the
-// NXP LPC81X
+// mask and addresses may be the same.
 
-#define ws2812_port_set ((uint32_t*)&LPC_GPIO_PORT->SET0)	// Address of the data port register to set the pin
-#define ws2812_port_clr	((uint32_t*)&LPC_GPIO_PORT->CLR0)	// Address of the data port register to clear the pin
+#define WS2812_PORT 0
+#define WS2812_BIT 14
 
-#define ws2812_mask_set  (1<<2)		// Bitmask to set the data out pin
-#define ws2812_mask_clr  (1<<2)		// Bitmask to clear the data out pin
+#define ws2812_port_set ((uint32_t*)&LPC_GPIO->SET[WS2812_PORT])       // Address of the data port register to set the pin
+#define ws2812_port_clr ((uint32_t*)&LPC_GPIO->CLR[WS2812_PORT])       // Address of the data port register to clear the pin
+
+#define ws2812_mask_set  (1<<WS2812_BIT)		// Bitmask to set the data out pin
+#define ws2812_mask_clr  (1<<WS2812_BIT)		// Bitmask to clear the data out pin
+
+
 
 ///////////////////////////////////////////////////////////////////////
 // User defined area: Define CPU clock speed
@@ -46,7 +50,7 @@
 //
 ///////////////////////////////////////////////////////////////////////
 
-#define ws2812_cpuclk 30000000
+#define ws2812_cpuclk (48000000/2)
 
 ///////////////////////////////////////////////////////////////////////
 // End user defined area
