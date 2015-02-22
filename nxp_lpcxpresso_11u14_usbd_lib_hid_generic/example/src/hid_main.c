@@ -35,6 +35,8 @@
 #include "app_usbd_cfg.h"
 #include "hid_generic.h"
 
+#include "light_ws2812_cortex.h"
+
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
@@ -130,6 +132,9 @@ int main(void)
 	ErrorCode_t ret = LPC_OK;
 
 	Board_Init();
+
+	Chip_IOCON_PinMuxSet(LPC_IOCON, WS2812_PORT, WS2812_BIT, IOCON_MODE_INACT | IOCON_FUNC1 | IOCON_DIGMODE_EN);
+	Chip_GPIO_SetPinDIROutput(LPC_GPIO, WS2812_PORT, WS2812_BIT);
 
 	usb_pin_clk_init();
 
