@@ -121,6 +121,8 @@ USB_INTERFACE_DESCRIPTOR *find_IntfDesc(const uint8_t *pDesc, uint32_t intfClass
 	return pIntfDesc;
 }
 
+uint8_t rgb[3];
+
 /**
  * @brief	main routine for blinky example
  * @return	Function should not exit.
@@ -174,7 +176,6 @@ int main(void)
 
 	}
 
-	uint8_t rgb[3];
 	rgb[0] = 0x00;
 	rgb[1] = 0xff;
 	rgb[2] = 0x99;
