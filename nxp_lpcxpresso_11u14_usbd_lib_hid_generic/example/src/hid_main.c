@@ -183,5 +183,6 @@ int main(void)
 
 	while (1) {
 		__WFI();
+		ws2812_sendarray(rgb, 3); // TODO: Check value has changed?
 	}
 }

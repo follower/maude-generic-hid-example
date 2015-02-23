@@ -34,6 +34,8 @@
 #include <string.h>
 #include "usbd_rom_api.h"
 
+extern uint8_t rgb[3];
+
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
@@ -93,6 +95,8 @@ static ErrorCode_t HID_SetReport(USBD_HANDLE_T hHid, USB_SETUP_PACKET *pSetup, u
 	return LPC_OK;
 }
 
+uint8_t colour_idx = 0;
+
 /* HID Interrupt endpoint event handler. */
 static ErrorCode_t HID_Ep_Hdlr(USBD_HANDLE_T hUsb, void *data, uint32_t event)
 {
@@ -108,6 +112,11 @@ static ErrorCode_t HID_Ep_Hdlr(USBD_HANDLE_T hUsb, void *data, uint32_t event)
 		USBD_API->hw->ReadEP(hUsb, pHidCtrl->epout_adr, loopback_report);
 		/* loopback the report received. */
 		USBD_API->hw->WriteEP(hUsb, pHidCtrl->epin_adr, loopback_report, 1);
+
+		// Cycle through setting the red, green or blue value
+		colour_idx = (colour_idx + 1) % 3; //
+		rgb[colour_idx] = *loopback_report;
+
 		break;
 	}
 	return LPC_OK;
